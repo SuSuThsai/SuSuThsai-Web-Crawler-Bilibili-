@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThsaiYa_papa</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flow;
+            justify-content: center;
+            align-items: center;
+            background-image: url('/css/qingyin.jpg');
+            background-size: cover;
+        }
+
+        .shell {
+            width: 640px;
+            height: 200px;
+            display: flex;
+        }
+
+        .bv_k {
+            width: 320px;
+            height: 100%;
+            display: table-row;
+        }
+
+        .bv {
+            background-color: #9499a0;
+            width: 320px;
+            height: 100px;
+            display: flex;
+            box-shadow: 0 0 0px 2px rgba(0, 0, 0, .2);
+            color: #f1f1f1;
+        }
+
+        /*.box-left{*/
+        /*    background-color: #fff;*/
+        /*    height: 280px;*/
+        /*    top: 20px;*/
+        /*    position: relative;*/
+        /*    width: 50%;*/
+        /*}*/
+        /*.box-left h2{*/
+        /*    font: 900 50px '';*/
+        /*    margin: 50px 40px 40px;*/
+        /*}*/
+        /*.box-left span{*/
+        /*    display: block;*/
+        /*    color: #999;*/
+        /*    font-style: 10px;*/
+        /*    margin: 40px;*/
+        /*}*/
+        .box-right {
+            background-color: #474a59;
+            box-shadow: 0 0 10px 16px rgba(0, 0, 0, .3);
+            color: #f1f1f2;
+            width: 50%;
+        }
+
+        .form {
+            margin: 10px;
+            position: absolute;
+        }
+
+        label {
+            color: #fff;
+            display: block;
+            font-size: 14px;
+            height: 16px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        input {
+            background: transparent;
+            border: 0;
+            color: #fff;
+            font-style: normal;
+            height: 20px;
+            line-height: 20px;
+            width: 100%;
+            outline: none !important;
+        }
+
+        label::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 52px;
+            width: 100%;
+            height: 3px;
+            background-image: linear-gradient(to right, #44ffff, #b888ff);
+        }
+
+
+        #submit_1 {
+            color: #fff;
+            margin-top: 30px;
+            width: 100px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, .1);
+            border-radius: 20px;
+            float: right;
+            transition: .3s;
+        }
+
+        button {
+            color: #fff;
+            margin-top: 0px;
+            width: 35px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, .1);
+            border-radius: 20px;
+            float: right;
+            transition: .3s;
+            display: flow;
+            position: absolute;
+        }
+
+        /*#submit:hover{*/
+        /*    letter-spacing: 2px;*/
+        /*    color: #000;*/
+        /*    background-color: #fff;*/
+        /*}*/
+        .img {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-image: url('/css/goat.gif');
+            background-size: cover;
+        }
+
+        .recall {
+            background-image: linear-gradient(to right, #44ffff, #b888ff);
+            color:#474a59;
+            /*box-shadow: 0 0 25px 25px rgba(0, 0, 0, .2);*/
+            font-size: 25px;
+            font-palette: light;
+            margin-top: 0px;
+            width: 320px;
+            height:30px;
+            background-color: rgba(255, 255, 255, .1);
+            /*border-radius: 20px;*/
+            float: right;
+            transition: .3s;
+            display: flow;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+<div class="img"></div>
+<script>
+    let img = document.querySelector('.img')
+    // 定义小图片的旋转角度
+    let deg = 0
+    // 定义小图片位于网页左侧的位置
+    let imgx = 0
+    // 定义小图片位于网页顶部的位置
+    let imgy = 0
+    // 定义小图片x轴的位置
+    let imgl = 0
+    // 定义小图片y轴的位置
+    let imgt = 0
+    // 定义小图片翻转的角度
+    let y = 0
+    // 定义一个计数器
+    let index = 0
+
+    window.addEventListener('mousemove', function (xyz) {
+        // 获取网页左侧距离的图片位置
+        imgx = xyz.x - img.offsetLeft - img.clientWidth / 2
+        // 多去网页顶部距离图片的位置
+        imgy = xyz.y - img.offsetTop - img.clientHeight / 2
+        // 套入公式，定义图片的旋转角度
+        deg = 360 * Math.atan(imgy / imgx) / (2 * Math.PI)
+        // 每当鼠标移动的时候重置index
+        index = 0
+        // 定义当前鼠标的位置
+        let x = event.clientX
+        // 当鼠标的x轴大于图片的时候，提普安就要对着鼠标，所以需要将图片翻转过来
+        // 否则就不用翻转
+        if (img.offsetLeft < x) {
+            y = -180
+        } else {
+            y = 0
+        }
+    })
+    setInterval(() => {
+        // 设置小图片的旋转和翻转
+        img.style.transform = "rotateZ(" + deg + "deg) rotateY(" + y + "deg)"
+        index++
+        // 在这里设置小图片的位置和速度，并判断小图片到达鼠标位置时停止移动
+        if (index < 50) {
+            imgl += imgx / 50
+            imgt += imgy / 50
+        }
+        img.style.left = imgl + "px"
+        img.style.top = imgt + "px"
+    }, 10)
+</script>
+<div class="shell">
+    <div class="box-right">
+        <form class="form" action="/login_que">
+            <label for="email">账号</label>
+            <input type="text" id="email" name="zhanghao">
+            <label for="password">密码</label>
+            <input type="password" id="password" name="mima">
+            <button type="submit" id="submit_1" aria-label="Submit">提交</button>
+        </form>
+    </div>
+</div>
+</body>
+<p class="recall"> {{.}}</p>
+
+</html>
